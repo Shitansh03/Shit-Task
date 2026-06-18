@@ -24,8 +24,6 @@ app.use(limiter);
 const connectDB = require("./config/db");
 connectDB();
 
-console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
-
 app.use(express.json());
 app.disable("x-powered-by");
 
