@@ -24,7 +24,6 @@ const TaskCard = ({ task, view = "grid" }) => {
                 ? "bg-yellow-50 border-yellow-200 text-yellow-700"
                 : "bg-red-50 border-red-200 text-red-600";
 
-    // ================= GRID VIEW =================
 
     if (view === "grid") {
         return (
@@ -117,7 +116,7 @@ const TaskCard = ({ task, view = "grid" }) => {
         );
     }
 
-    // ================= LIST VIEW =================
+// list view
     return (
         <div
             onClick={() => openEdit(task)}

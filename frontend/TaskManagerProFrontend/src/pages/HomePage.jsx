@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { FiSend } from "react-icons/fi";
 
 const HomePage = () => {
 
@@ -17,8 +18,8 @@ const HomePage = () => {
     return (
         <div className="h-full flex flex-col items-center justify-center text-center">
 
-            <h1 className="text-4xl font-bold mb-4">
-                Manage Your Tasks Efficiently 🚀
+            <h1 className="text-4xl font-bold mb-4 flex items-center justify-center gap-2">
+                Manage Your Tasks Efficiently <FiSend className="text-black" size={28} />
             </h1>
 
             <p className="text-gray-600 mb-6">

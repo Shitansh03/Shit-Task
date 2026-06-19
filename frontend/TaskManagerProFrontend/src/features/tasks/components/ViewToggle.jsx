@@ -1,3 +1,5 @@
+import { FiGrid, FiList } from "react-icons/fi";
+
 const ViewToggle = ({ view, setView }) => {
     return (
         <div className="flex gap-2">
@@ -8,7 +10,7 @@ const ViewToggle = ({ view, setView }) => {
                     view === "grid" ? "bg-black text-white" : ""
                 }`}
             >
-                ⬜ Grid
+                <FiGrid className="inline mr-1" /> Grid
             </button>
 
             <button
@@ -17,7 +19,7 @@ const ViewToggle = ({ view, setView }) => {
                     view === "list" ? "bg-black text-white" : ""
                 }`}
             >
-                ☰ List
+                <FiList className="inline mr-1" /> List
             </button>
 
         </div>

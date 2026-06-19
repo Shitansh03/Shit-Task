@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import TaskCalendar from "../components/TaskCalendar";
+import { FiList, FiClock, FiTool, FiCheckCircle, FiAlertTriangle } from "react-icons/fi";
 
 
 const Sidebar = () => {
@@ -20,14 +21,13 @@ const Sidebar = () => {
                     <NavLink
                         to="/tasks/all-tasks"
                         className={({ isActive }) =>
-                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${
-                                isActive
-                                    ? "bg-black text-white shadow-md scale-[1.02]"
-                                    : "text-gray-600 hover:bg-gray-100 hover:text-black hover:scale-[1.02]"
+                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${isActive
+                                ? "bg-black text-white shadow-md scale-[1.02]"
+                                : "text-gray-600 hover:bg-gray-100 hover:text-black hover:scale-[1.02]"
                             }`
                         }
                     >
-                        📋 <span className="ml-2">All Tasks</span>
+                        <FiList className="text-gray-500" size={16} /> <span className="ml-2">All Tasks</span>
                     </NavLink>
                 </li>
 
@@ -35,14 +35,13 @@ const Sidebar = () => {
                     <NavLink
                         to="/tasks/pending"
                         className={({ isActive }) =>
-                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${
-                                isActive
-                                    ? "bg-yellow-500 text-white shadow-md scale-[1.02]"
-                                    : "text-gray-600 hover:bg-yellow-50 hover:text-yellow-600 hover:scale-[1.02]"
+                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${isActive
+                                ? "bg-yellow-500 text-white shadow-md scale-[1.02]"
+                                : "text-gray-600 hover:bg-yellow-50 hover:text-yellow-600 hover:scale-[1.02]"
                             }`
                         }
                     >
-                        ⏳ <span className="ml-2">Pending</span>
+                        <FiClock className="text-yellow-500" size={16} /> <span className="ml-2">Pending</span>
                     </NavLink>
                 </li>
 
@@ -50,14 +49,13 @@ const Sidebar = () => {
                     <NavLink
                         to="/tasks/in-progress"
                         className={({ isActive }) =>
-                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${
-                                isActive
-                                    ? "bg-blue-500 text-white shadow-md scale-[1.02]"
-                                    : "text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:scale-[1.02]"
+                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${isActive
+                                ? "bg-blue-500 text-white shadow-md scale-[1.02]"
+                                : "text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:scale-[1.02]"
                             }`
                         }
                     >
-                        🚧 <span className="ml-2">In Progress</span>
+                        <FiTool className="text-blue-500" size={16} /> <span className="ml-2">In Progress</span>
                     </NavLink>
                 </li>
 
@@ -65,14 +63,13 @@ const Sidebar = () => {
                     <NavLink
                         to="/tasks/completed"
                         className={({ isActive }) =>
-                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${
-                                isActive
-                                    ? "bg-green-500 text-white shadow-md scale-[1.02]"
-                                    : "text-gray-600 hover:bg-green-50 hover:text-green-600 hover:scale-[1.02]"
+                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${isActive
+                                ? "bg-green-500 text-white shadow-md scale-[1.02]"
+                                : "text-gray-600 hover:bg-green-50 hover:text-green-600 hover:scale-[1.02]"
                             }`
                         }
                     >
-                        ✅ <span className="ml-2">Completed</span>
+                        <FiCheckCircle className="text-green-500" size={16} /> <span className="ml-2">Completed</span>
                     </NavLink>
                 </li>
 
@@ -80,14 +77,13 @@ const Sidebar = () => {
                     <NavLink
                         to="/tasks/high-priority"
                         className={({ isActive }) =>
-                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${
-                                isActive
-                                    ? "bg-red-500 text-white shadow-md scale-[1.02]"
-                                    : "text-gray-600 hover:bg-red-50 hover:text-red-600 hover:scale-[1.02]"
+                            `flex items-center px-3 py-2 rounded-xl transition-all duration-200 ${isActive
+                                ? "bg-red-500 text-white shadow-md scale-[1.02]"
+                                : "text-gray-600 hover:bg-red-50 hover:text-red-600 hover:scale-[1.02]"
                             }`
                         }
                     >
-                        🔥 <span className="ml-2">High Priority</span>
+                        <FiAlertTriangle className="text-red-500" size={16} /> <span className="ml-2">High Priority</span>
                     </NavLink>
                 </li>
             </ul>

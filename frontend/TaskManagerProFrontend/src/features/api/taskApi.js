@@ -47,7 +47,7 @@ export const taskApi = createApi({
             query: (data) => ({
                 url: "/auth/google",
                 method: "POST",
-                body: data, // 🔥 Ab yeh direct { credential: "..." } bhejeha
+                body: data,
             }),
         }),
 

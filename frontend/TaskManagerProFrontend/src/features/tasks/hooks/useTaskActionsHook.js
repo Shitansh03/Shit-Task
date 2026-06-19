@@ -12,14 +12,14 @@ const useTaskActions = () => {
     const [deleteTask] = useDeleteTaskMutation();
     const [updateTask] = useUpdateTaskMutation();
 
-    // edit handle karega
+
     const openEdit = (task) => {
         navigate("/add-task", {
             state: { task },
         });
     };
 
-    // delete handle karega
+
     const handleDelete = async (id, e) => {
 
         e.stopPropagation();
@@ -31,7 +31,7 @@ const useTaskActions = () => {
         }
     };
 
-    // complete handle karega
+
     const toggleComplete = async (task, e) => {
 
         e.stopPropagation();
@@ -49,7 +49,7 @@ const useTaskActions = () => {
         }
     };
 
-    //update handle krne kliye
+
     const updateField = async (task, field, value, e) => {
 
         e.stopPropagation();

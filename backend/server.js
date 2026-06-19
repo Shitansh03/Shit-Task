@@ -46,7 +46,7 @@ const taskRoutes = require("./routes/taskRoutes");
 app.use("/api/tasks", taskRoutes);
 
 app.get("/", (req, res) => {
-    res.send("Task-Manager-Pro is running successfully");
+    res.send("Task-Manager-Pro (Shit-Task) is running successfully");
 });
 
 

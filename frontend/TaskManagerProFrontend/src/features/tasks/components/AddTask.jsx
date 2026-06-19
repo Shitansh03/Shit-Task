@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCreateTaskMutation, useUpdateTaskMutation } from "../../api/taskApi";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
 
 const AddTask = () => {
 
@@ -58,20 +59,17 @@ const AddTask = () => {
 
             <div className="w-full max-w-xl bg-white/80 backdrop-blur-lg border border-gray-200 shadow-2xl rounded-3xl p-8 transition-all">
 
-                {/* Header */}
                 <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-gray-800">
-                        {editTask ? "✏️ Edit Task" : "➕ Create New Task"}
+                    <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                        {editTask ? <FaPencilAlt className="text-gray-700" /> : <FaPlus className="text-gray-700" />} {editTask ? "Edit Task" : "Create New Task"}
                     </h2>
                     <p className="text-sm text-gray-500">
                         {editTask ? "Update your task details" : "Fill details to add a new task"}
                     </p>
                 </div>
 
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-5">
 
-                    {/* Title */}
                     <div>
                         <label className="text-sm text-gray-600">Title</label>
                         <input
@@ -83,7 +81,6 @@ const AddTask = () => {
                         />
                     </div>
 
-                    {/* Description */}
                     <div>
                         <label className="text-sm text-gray-600">Description</label>
                         <textarea
@@ -94,7 +91,6 @@ const AddTask = () => {
                         />
                     </div>
 
-                    {/* Status + Priority */}
                     <div className="grid grid-cols-2 gap-4">
 
                         <div>
@@ -125,7 +121,6 @@ const AddTask = () => {
 
                     </div>
 
-                    {/* Due Date */}
                     <div>
                         <label className="text-sm text-gray-600">Due Date</label>
                         <input
@@ -136,7 +131,6 @@ const AddTask = () => {
                         />
                     </div>
 
-                    {/* Buttons */}
                     <div className="flex gap-3 pt-2">
 
                         <button

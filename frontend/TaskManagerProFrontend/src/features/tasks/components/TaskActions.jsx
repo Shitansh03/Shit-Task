@@ -1,3 +1,5 @@
+import { FiX, FiCheck, FiEdit2, FiTrash2 } from "react-icons/fi";
+
 const TaskActions = ({
     task,
     toggleComplete,
@@ -23,7 +25,7 @@ const TaskActions = ({
                 hover:scale-110 active:scale-95 transition"
             >
                 <span className="text-green-600 text-sm">
-                    {task.status === "completed" ? "✖" : "✔"}
+                    {task.status === "completed" ? <FiX /> : <FiCheck />}
                 </span>
             </button>
 
@@ -38,7 +40,7 @@ const TaskActions = ({
                 hover:scale-110 active:scale-95 transition"
             >
                 <span className="text-blue-600 text-sm">
-                    ✎
+                    <FiEdit2 />
                 </span>
             </button>
 
@@ -53,7 +55,7 @@ const TaskActions = ({
                 hover:scale-110 active:scale-95 transition"
             >
                 <span className="text-red-600 text-sm">
-                    🗑
+                    <FiTrash2 />
                 </span>
             </button>
         </div>

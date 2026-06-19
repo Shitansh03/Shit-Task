@@ -3,14 +3,12 @@ import { useGetAllTasksQuery } from "../features/api/taskApi";
 import { useSelector } from "react-redux";
 import { skipToken } from "@reduxjs/toolkit/query";
 
-// ================= FIXED DATE FORMATTER (Timezone Safe) =================
 const formatDate = (date) => {
     if (!date) return "";
 
     const d = new Date(date);
-    if (isNaN(d.getTime())) return ""; // Safe check for invalid dates
+    if (isNaN(d.getTime())) return "";
 
-    // Use UTC methods to bypass local browser timezone shifting bugs
     const year = d.getUTCFullYear();
     const month = String(d.getUTCMonth() + 1).padStart(2, "0");
     const day = String(d.getUTCDate()).padStart(2, "0");
@@ -18,7 +16,7 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 };
 
-// ================= GROUP TASKS =================
+
 const getTasksByDate = (tasks) => {
     const map = {};
 
@@ -40,10 +38,10 @@ const getTasksByDate = (tasks) => {
 
         map[date].total += 1;
 
-        // Clean & normalize status value for comparison
+    
         const taskStatus = task.status ? task.status.trim().toLowerCase() : "";
 
-        // Standardize different backend naming conventions
+        
         if (taskStatus === "pending") {
             map[date].pending += 1;
         }
@@ -59,7 +57,7 @@ const getTasksByDate = (tasks) => {
             map[date].completed += 1;
         }
 
-        // Priority check (Case-insensitive)
+        
         const taskPriority = task.priority ? task.priority.trim().toLowerCase() : "";
         if (taskPriority === "high") {
             map[date].high += 1;
@@ -69,7 +67,7 @@ const getTasksByDate = (tasks) => {
     return map;
 };
 
-// ================= COLOR CONFIGURATION =================
+
 const colorMap = {
     high: "#ef4444",      // Red
     progress: "#3b82f6",  // Blue
@@ -77,14 +75,14 @@ const colorMap = {
     completed: "#22c55e"  // Green
 };
 
-// ================= DAYCIRCLE COMPONENT (DYNAMIC GRADIENTS) =================
+
 const DayCircle = ({
     day,
     counts,
     isToday,
     isSelected,
     onClick,
-    gridIndex, // Passed down to calculate screen boundaries dynamically
+    gridIndex, 
 }) => {
     const activeTypes = [];
     if (counts?.high > 0) activeTypes.push("high");
@@ -121,17 +119,15 @@ const DayCircle = ({
         textColor = "#ffffff";
     }
 
-    // Dynamic positioning based on weekday index (0-6)
+    //positioning based on weekday index (0-6)
     const dayOfWeek = gridIndex % 7; 
     let tooltipAlignClass = "left-1/2 -translate-x-1/2";
     let arrowAlignClass = "mx-auto";
 
     if (dayOfWeek === 0 || dayOfWeek === 1) {
-        // Left-most side columns: align card to the left, nudge right, shift arrow to the left side
         tooltipAlignClass = "left-0 translate-x-0";
         arrowAlignClass = "ml-3.5 mr-auto";
     } else if (dayOfWeek === 5 || dayOfWeek === 6) {
-        // Right-most side columns: align card to the right, nudge left, shift arrow to the right side
         tooltipAlignClass = "right-0 translate-x-0";
         arrowAlignClass = "mr-3.5 ml-auto";
     }
@@ -175,7 +171,7 @@ const DayCircle = ({
                 >
                     {day}
 
-                    {/* ✨ ULTRA PREMIUM HOVER GLOW & SNAPSHOT CARD */}
+                    
                     {counts?.total > 0 && (
                         <div
                             className={`
@@ -195,7 +191,7 @@ const DayCircle = ({
                                 ${tooltipAlignClass}
                             `}
                         >
-                            {/* Colorful background radial glow matched to task counts */}
+                            
                             <div 
                                 className="absolute inset-0 blur-xl opacity-40 rounded-2xl" 
                                 style={{
@@ -205,7 +201,7 @@ const DayCircle = ({
                                 }}
                             />
 
-                            {/* Ultra Glassmorphic Tooltip Card */}
+                            
                             <div
                                 className="
                                     relative
@@ -222,7 +218,7 @@ const DayCircle = ({
                                     min-w-[145px]
                                 "
                             >
-                                {/* Header */}
+                          
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="text-[8px] text-zinc-400 font-semibold tracking-wider uppercase">
                                         Tasks Summary
@@ -233,7 +229,7 @@ const DayCircle = ({
                                     </span>
                                 </div>
 
-                                {/* Counts List: Only render statuses that are explicitly > 0 on this date */}
+                               
                                 <div className="space-y-1.5">
                                     {counts.pending > 0 && (
                                         <div className="flex justify-between items-center text-zinc-300">
@@ -275,7 +271,7 @@ const DayCircle = ({
                                         </div>
                                     )}
 
-                                    {/* Premium Divider */}
+                        
                                     <div className="h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-1.5" />
 
                                     <div className="flex justify-between items-center">
@@ -287,7 +283,7 @@ const DayCircle = ({
                                 </div>
                             </div>
 
-                            {/* Crisp downward pointer arrow dynamically aligned to point directly at the button */}
+                            
                             <div className={`w-2.5 h-2.5 bg-zinc-950 rotate-45 -mt-1.5 border-r border-b border-white/10 ${arrowAlignClass}`} />
                         </div>
                     )}
@@ -297,7 +293,7 @@ const DayCircle = ({
     );
 };
 
-// ================= MAIN TASK CALENDAR =================
+
 const TaskCalendar = () => {
     const isAuthenticated = useSelector(
         (state) => state.auth.isAuthenticated
@@ -309,15 +305,12 @@ const TaskCalendar = () => {
 
     const shouldFetch = authReady && isAuthenticated;
 
-    // 🔥 API Call without any specific parameters to get ALL tasks for the calendar
-    // TaskCalendar.jsx
-
     const {
         data,
         isLoading,
         isError,
     } = useGetAllTasksQuery(
-        shouldFetch ? { limit: 1000 } : skipToken  // ← yeh fix karo
+        shouldFetch ? { limit: 1000 } : skipToken
     );
 
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -333,7 +326,6 @@ const TaskCalendar = () => {
     const month = currentDate.getMonth();
     const today = new Date();
 
-    // ================= FIXED CALENDAR CELLS =================
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = new Date(year, month + 1, 0).getDate();
 
@@ -350,7 +342,6 @@ const TaskCalendar = () => {
         }
     }
 
-    // ================= DATE KEY =================
     const getKey = (day) => {
         if (!day) return "";
 
@@ -361,7 +352,6 @@ const TaskCalendar = () => {
         );
     };
 
-    // ================= MONTH NAVIGATION =================
     const prevMonth = () => {
         setCurrentDate(new Date(year, month - 1, 1));
     };
@@ -370,7 +360,6 @@ const TaskCalendar = () => {
         setCurrentDate(new Date(year, month + 1, 1));
     };
 
-    // ================= LOADING STATE =================
     if (isLoading) {
         return (
             <div className="rounded-2xl bg-white border border-gray-200 p-4 shadow-sm">
@@ -391,7 +380,6 @@ const TaskCalendar = () => {
         );
     }
 
-    // ================= ERROR STATE =================
     if (isError) {
         return (
             <div className="rounded-2xl bg-red-50 border border-red-100 p-4 text-center">
@@ -421,7 +409,7 @@ const TaskCalendar = () => {
                 flex-shrink-0
             "
         >
-            {/* HEADER */}
+
             <div className="flex items-center justify-between mb-2 flex-shrink-0">
                 <button
                     onClick={prevMonth}
@@ -477,7 +465,7 @@ const TaskCalendar = () => {
                 </button>
             </div>
 
-            {/* WEEK DAYS */}
+
             <div className="grid grid-cols-7 mb-1.5 text-center flex-shrink-0">
                 {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
                     <div
@@ -493,7 +481,7 @@ const TaskCalendar = () => {
                 ))}
             </div>
 
-            {/* DAYS GRID */}
+
             <div className="grid grid-cols-7 gap-y-1 gap-x-1 auto-rows-max justify-items-center flex-grow flex-shrink-0">
                 {days.map((day, i) => {
                     if (!day) {
@@ -531,7 +519,7 @@ const TaskCalendar = () => {
                 })}
             </div>
 
-            {/* FOOTER & LEGENDS */}
+  
             <div className="mt-2 pt-2 border-t border-gray-100 flex-shrink-0">
                 <div className="flex flex-wrap gap-2 justify-center">
                     <div className="flex items-center gap-1 text-[8px] text-gray-500">
